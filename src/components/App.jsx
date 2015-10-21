@@ -1,13 +1,42 @@
-import React, { PropTypes } from 'react'
+import React, { PropTypes as T } from 'react'
 import SmartButton from './controls/button'
+import SmartTable from './controls/SmartTable/table'
+import { json as request } from 'lgutil/common/ajax'
+// import LoginTest from './controls/login'
 import 'less/site.less'
 
 const Demo = React.createClass({
+  propTypes: {
+    data: T.object
+  },
+  componentDidMount () {
+    const url = 'http://10.10.73.208:1339/user/login'
+
+    const body = {
+      'uid': 'admin',
+      'pwd': '123456'
+    }
+
+    const pending = request.post(url, body)
+
+    pending.then((res) => {
+      const url = 'http://10.10.73.208:1339/rest/resource?conditions.resourceId.$gt=0&token='
+      return request.get(url + res.body.session.token)
+    }).then((res) => {
+      this.props.data = res.body
+      console.log(this.props.data)
+      this.setState({ tableState: 1 })
+      // console.log(SmartTable.setState)
+    })
+  },
+
   getInitialState () {
     return {
-      buttonState: 1
+      buttonState: 1,
+      tableState: 0
     }
   },
+
   render () {
     return (
       <div className='container'>
@@ -28,6 +57,7 @@ const Demo = React.createClass({
           {/* disabled */}
           <SmartButton className='btn btn-error' state={-1}>按钮4</SmartButton>
         </div>
+        <SmartTable className='table' data={this.props.data} />
       </div>
     )
   },
