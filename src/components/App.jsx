@@ -2,7 +2,6 @@ import React, { PropTypes as T } from 'react'
 import SmartButton from './controls/button'
 import SmartTable from './controls/SmartTable/table'
 import { json as request } from 'lgutil/common/ajax'
-// import LoginTest from './controls/login'
 import 'less/site.less'
 
 const Demo = React.createClass({
@@ -21,12 +20,12 @@ const Demo = React.createClass({
 
     pending.then((res) => {
       const url = 'http://10.10.73.208:1339/rest/resource?conditions.resourceId.$gt=0&token='
+      console.log(url + res.body.session.token)
       return request.get(url + res.body.session.token)
     }).then((res) => {
       this.props.data = res.body
       console.log(this.props.data)
       this.setState({ tableState: 1 })
-      // console.log(SmartTable.setState)
     })
   },
 
@@ -57,7 +56,7 @@ const Demo = React.createClass({
           {/* disabled */}
           <SmartButton className='btn btn-error' state={-1}>按钮4</SmartButton>
         </div>
-        <SmartTable className='table' data={this.props.data} />
+        <SmartTable className='table' data={this.props.data} hideColumn='_id resourceId leaveDate' sort='true' extendColumn='account' />
       </div>
     )
   },
