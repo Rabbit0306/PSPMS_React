@@ -7,19 +7,13 @@ const tableHeader = React.createClass({
     data: T.array,
     onClick: T.func
   },
-  getInitialState () {
-    return {
-      sortBy: 0
-    }
-  },
   getDefaultProps () {
   },
   componentDidMount () {
   },
   render () {
-    const a = 1
     return (
-        <thead ref='thead'>
+        <thead>
           <tr>{this._modifyTableHeader()}</tr>
         </thead>
     )
@@ -28,9 +22,14 @@ const tableHeader = React.createClass({
   _modifyTableHeader () {
     const headers = [], self = this
     this.props.data.map(function (header, key) {
-      headers.push(<th key={key} onClick={self.props.onClick}>{header['name']}</th>)
+      headers.push(<th key={key} onClick={self._clickHeader(self.props.onClick, key, self.props.data)}>{header['name']}</th>)
     })
     return headers
+  },
+  _clickHeader (func, sortId) {
+    return (event, reactid) => {
+      func && func(event, reactid, sortId)
+    }
   }
 })
 

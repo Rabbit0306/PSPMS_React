@@ -5,26 +5,51 @@ import TableHeader from './tableHeader'
 import TableBody from './tableList'
 
 const SmartTable = React.createClass({
+  _myProps: {
+    firstFresh: 0,
+    tableData: {},
+    headers: [],
+    body: []
+  },
+
   propTypes: {
     className: T.string,
     hideColumn: T.string,
     extendColumn: T.string,
-    data: T.array
+    data: T.array,
+    state: T.number,
+    sortable: T.bool
   },
-  getDefaultProps () {
-
-  },
-  componentDidMount () {
-
+  getInitialState () {
+    return {
+      SortBy: 0,
+      OrderBy: 1
+    }
   },
   render () {
-    const tableData = this._modifyTableData()
-    const headerData = this._getHeaderData(tableData)
-    const bodyData = this._getBodyData(tableData)
+    if (this.props.sortable) {
+      if (this._myProps.firstFresh === -1) {
+        console.log('Fresh Data..')
+        this._myProps.bodyData = this._orderTableData(this._myProps.bodyData)
+      } else if (this.props.state === 1) {
+        console.log('Resolve Data..')
+        this._myProps.tableData = this._modifyTableData()
+        this._myProps.headerData = this._getHeaderData(this._myProps.tableData)
+        this._myProps.bodyData = this._getBodyData(this._myProps.tableData)
+        this._myProps.firstFresh = -1
+      } else if (this.props.state === 0) {
+        console.log('Init Data..')
+        this._myProps.headerData = this._myProps.bodyData = []
+      }
+    } else {
+      this._myProps.tableData = this._modifyTableData()
+      this._myProps.headerData = this._getHeaderData(this._myProps.tableData)
+      this._myProps.bodyData = this._getBodyData(this._myProps.tableData)
+    }
     return (
         <table className={this.props.className}>
-          <TableHeader data={headerData} onClick={this._clickHeader} />
-          <TableBody data={bodyData} extendColumn={this.props.extendColumn} />
+          <TableHeader data={this._myProps.headerData} onClick={this._clickToSort} />
+          <TableBody data={this._myProps.bodyData} extendColumn={this.props.extendColumn} sortBy={this.state.SortBy} orderBy={this.state.OrderBy} />
         </table>
     )
   },
@@ -48,7 +73,7 @@ const SmartTable = React.createClass({
     const self = this
     dataHeaders.forEach(function (dataHeader) {
       if (!self._isHeaderExisted(dataHeader, tableHeader)) {
-        tableHeader.push({ name: dataHeader, sort: 0 } )
+        tableHeader.push({ name: dataHeader, sort: 1 } )
       }
     })
   },
@@ -59,7 +84,7 @@ const SmartTable = React.createClass({
       if (data[header['name']] !== undefined) {
         tableRow.push(data[header['name']])
       } else {
-        tableRow.push({})
+        tableRow.push(null)
       }
     })
     tableData.push(tableRow)
@@ -96,9 +121,22 @@ const SmartTable = React.createClass({
   _getBodyData (data) {
     return data ? data['body'] : []
   },
-
-  _clickHeader () {
-    console.log(this)
+  _clickToSort (event, reactid, sortId) {
+    this._myProps.headerData[sortId].sort *= -1
+    this.setState({ SortBy: sortId, OrderBy: this._myProps.headerData[sortId].sort })
+  },
+  _orderTableData (dataList) {
+    const self = this
+    dataList.sort(function (a, b) {
+      if (a[self.state.SortBy] > b[self.state.SortBy]) {
+        return self.state.OrderBy
+      } else if (a[self.state.SortBy] < b[self.state.SortBy]) {
+        return -self.state.OrderBy
+      } else {
+        return 0
+      }
+    })
+    return dataList
   }
 })
 

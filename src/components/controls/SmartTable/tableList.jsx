@@ -6,11 +6,15 @@ import 'less/table.less'
 const tableList = React.createClass({
   propTypes: {
     data: T.array,
-    extendColumn: T.string
+    extendColumn: T.string,
+    sortBy: T.number,
+    orderBy: T.number
   },
   getDefaultProps () {
+
   },
   componentDidMount () {
+
   },
   render () {
     return (
@@ -21,12 +25,12 @@ const tableList = React.createClass({
   },
 
   _modifyTableBody () {
-    const body = []
+    const body = [], self = this
     this.props.data.map(function (list, key) {
       const row = []
       list.map(function (element, key) {
         switch (typeof element) {
-        case 'boolean': row.push(<td key={key}><input type='checkbox' checked={element ? 'checked' : null} /></td>)
+        case 'boolean': row.push(<td key={key}><input type='checkbox' checked={element ? 'checked' : null} onChange={self._checkedOnChange} /></td>)
           break
         case 'number': row.push(<td key={key}>{element}</td>)
           break
@@ -51,6 +55,9 @@ const tableList = React.createClass({
       body.push(<tr key={key} className={key%2 === 0 ? 'table body even' : 'table body odd'}>{row}</tr>)
     })
     return body
+  },
+  _checkedOnChange () {
+
   }
 })
 

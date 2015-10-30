@@ -25,14 +25,14 @@ const Demo = React.createClass({
     }).then((res) => {
       this.props.data = res.body
       console.log(this.props.data)
-      this.setState({ tableState: 1 })
+      this.setState({ tableNeedFresh: 1 })
     })
   },
 
   getInitialState () {
     return {
       buttonState: 1,
-      tableState: 0
+      tableNeedFresh: 0
     }
   },
 
@@ -56,7 +56,7 @@ const Demo = React.createClass({
           {/* disabled */}
           <SmartButton className='btn btn-error' state={-1}>按钮4</SmartButton>
         </div>
-        <SmartTable className='table' data={this.props.data} hideColumn='_id resourceId leaveDate' sort='true' extendColumn='account' />
+        <SmartTable className='table' state={this.state.tableNeedFresh} data={this.props.data} hideColumn='_id resourceId leaveDate' sortable extendColumn='account' />
       </div>
     )
   },
