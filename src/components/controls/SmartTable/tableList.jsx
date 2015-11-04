@@ -6,9 +6,7 @@ import 'less/table.less'
 const tableList = React.createClass({
   propTypes: {
     data: T.array,
-    extendColumn: T.string,
-    sortBy: T.number,
-    orderBy: T.number
+    extendColumn: T.string
   },
   getDefaultProps () {
 
@@ -52,7 +50,7 @@ const tableList = React.createClass({
         default:row.push(<td key={key}>{element}</td>)
         }
       })
-      body.push(<tr key={key} className={key%2 === 0 ? 'table body even' : 'table body odd'}>{row}</tr>)
+      body.push(<tr key={key} className={key%2 === 0 ? 'table even' : 'table odd'}>{row}</tr>)
     })
     return body
   },

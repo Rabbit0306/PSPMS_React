@@ -18,7 +18,8 @@ const SmartTable = React.createClass({
     extendColumn: T.string,
     data: T.array,
     state: T.number,
-    sortable: T.bool
+    sortable: T.bool,
+    editable: T.bool
   },
   getInitialState () {
     return {
@@ -47,9 +48,9 @@ const SmartTable = React.createClass({
       this._myProps.bodyData = this._getBodyData(this._myProps.tableData)
     }
     return (
-        <table className={this.props.className}>
+        <table className='table'>
           <TableHeader data={this._myProps.headerData} onClick={this._clickToSort} />
-          <TableBody data={this._myProps.bodyData} extendColumn={this.props.extendColumn} sortBy={this.state.SortBy} orderBy={this.state.OrderBy} />
+          <TableBody data={this._myProps.bodyData} extendColumn={this.props.extendColumn} />
         </table>
     )
   },

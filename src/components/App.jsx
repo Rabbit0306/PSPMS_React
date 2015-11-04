@@ -56,7 +56,7 @@ const Demo = React.createClass({
           {/* disabled */}
           <SmartButton className='btn btn-error' state={-1}>按钮4</SmartButton>
         </div>
-        <SmartTable className='table' state={this.state.tableNeedFresh} data={this.props.data} hideColumn='_id resourceId leaveDate' sortable extendColumn='account' />
+        <SmartTable className='table' state={this.state.tableNeedFresh} data={this.props.data} hideColumn='_id resourceId leaveDate' editable sortable extendColumn='account' />
       </div>
     )
   },
