@@ -49,10 +49,10 @@ const Demo = React.createClass({
         </div>
         <div className='section'>
           <SmartButton className='btn btn-default'>按钮00</SmartButton>
-          <SmartButton className='btn btn-primary'>按钮0</SmartButton>
-          <SmartButton className='btn btn-success'>按钮1</SmartButton>
-          <SmartButton className='btn btn-warning'>按钮2</SmartButton>
-          <SmartButton className='btn btn-error'>按钮3</SmartButton>
+          <SmartButton className='btn btn-primary'>打开编辑</SmartButton>
+          <SmartButton className='btn btn-success'>关闭编辑</SmartButton>
+          <SmartButton className='btn btn-warning'>打开排序</SmartButton>
+          <SmartButton className='btn btn-error'>关闭排序</SmartButton>
           {/* disabled */}
           <SmartButton className='btn btn-error' state={-1}>按钮4</SmartButton>
         </div>

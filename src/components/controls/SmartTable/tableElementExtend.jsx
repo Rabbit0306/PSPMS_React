@@ -25,6 +25,12 @@ const TableElementExtend = React.createClass({
         </div>
     )
   },
+  __isHeaderExtend () {
+    const extendColumns = this.props.extendColumns ? this.props.extendColumns.split(' ') : []
+    for (const extendColumn of extendColumns) {
+      
+    }
+  },
   _EmptyObject (object) {
     if (typeof object === 'object' && !(object instanceof Array)) {
       let hasProp = true

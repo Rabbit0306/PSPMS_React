@@ -5,6 +5,7 @@ import 'less/table.less'
 const tableHeader = React.createClass({
   propTypes: {
     data: T.array,
+    sortable: T.bool,
     onClick: T.func
   },
   getDefaultProps () {
@@ -13,8 +14,8 @@ const tableHeader = React.createClass({
   },
   render () {
     return (
-        <thead>
-          <tr>{this._modifyTableHeader()}</tr>
+        <thead className='table head'>
+          <tr className={this.props.sortable ? 'table head headItem sortEnable' : 'table head headItem sortDisable'}>{this._modifyTableHeader()}</tr>
         </thead>
     )
   },
