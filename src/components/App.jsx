@@ -32,6 +32,8 @@ const Demo = React.createClass({
   getInitialState () {
     return {
       buttonState: 1,
+      tableCanEdit: false,
+      tableCanSort: false,
       tableNeedFresh: 0
     }
   },
@@ -49,14 +51,14 @@ const Demo = React.createClass({
         </div>
         <div className='section'>
           <SmartButton className='btn btn-default'>按钮00</SmartButton>
-          <SmartButton className='btn btn-primary'>打开编辑</SmartButton>
-          <SmartButton className='btn btn-success'>关闭编辑</SmartButton>
-          <SmartButton className='btn btn-warning'>打开排序</SmartButton>
-          <SmartButton className='btn btn-error'>关闭排序</SmartButton>
+          <SmartButton className='btn btn-primary' onClick={this._enableEdit}>打开编辑</SmartButton>
+          <SmartButton className='btn btn-success' onClick={this._disableEdit}>关闭编辑</SmartButton>
+          <SmartButton className='btn btn-warning' onClick={this._enableSort}>打开排序</SmartButton>
+          <SmartButton className='btn btn-error' onClick={this._disableSort}>关闭排序</SmartButton>
           {/* disabled */}
           <SmartButton className='btn btn-error' state={-1}>按钮4</SmartButton>
         </div>
-        <SmartTable className='table' state={this.state.tableNeedFresh} data={this.props.data} hideColumn='_id resourceId leaveDate' editable sortable extendColumn='account' />
+        <SmartTable className='table' state={this.state.tableNeedFresh} data={this.props.data} hideColumn='_id resourceId leaveDate' editable={this.state.tableCanEdit} sortable={this.state.tableCanSort} extendColumn='account' />
       </div>
     )
   },
@@ -69,6 +71,18 @@ const Demo = React.createClass({
   },
   _handleAnotherClick () {
     this.setState({ buttonState: -this.state.buttonState })
+  },
+  _enableEdit () {
+    this.setState({ tableCanEdit: true })
+  },
+  _disableEdit () {
+    this.setState({ tableCanEdit: false })
+  },
+  _enableSort () {
+    this.setState({ tableCanSort: true })
+  },
+  _disableSort () {
+    this.setState({ tableCanSort: false })
   },
   _getButtonContent () {
     if (this.state.buttonState === 0) {
