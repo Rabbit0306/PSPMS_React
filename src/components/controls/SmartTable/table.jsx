@@ -28,9 +28,11 @@ const SmartTable = React.createClass({
     }
   },
   render () {
+    console.log('this._myProps.firstFresh:' + this.props.state)
+    console.log('this.props.state:' + this.props.state)
     if (this.props.sortable) {
       if (this._myProps.firstFresh === -1) {
-        console.log('Fresh Data..')
+        console.log('Sort Data..')
         this._myProps.bodyData = this._orderTableData(this._myProps.bodyData)
       } else if (this.props.state === 1) {
         console.log('Resolve Data..')

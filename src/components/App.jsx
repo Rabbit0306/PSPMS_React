@@ -24,7 +24,7 @@ const Demo = React.createClass({
       return request.get(url + res.body.session.token)
     }).then((res) => {
       this.props.data = res.body
-      console.log(this.props.data)
+      console.log('Ajax get data!')
       this.setState({ tableNeedFresh: 1 })
     })
   },
@@ -33,7 +33,7 @@ const Demo = React.createClass({
     return {
       buttonState: 1,
       tableCanEdit: false,
-      tableCanSort: false,
+      tableCanSort: true,
       tableNeedFresh: 0
     }
   },
