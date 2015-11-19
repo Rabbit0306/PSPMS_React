@@ -1,16 +1,25 @@
+.container {
+  width: 2000px;
+  height: 768px;
+}
+
 .table {
   font-size: 12px;
   line-height: 1.42857143;
-  width: 100%;
   border-collapse:separate;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  border-color: #e2e7eb;
+  border-collapse:collapse;
 }
 
 .table .head {
-
+  border-bottom:2px solid #e2e7eb;
 }
 
 .table .head .headItem {
-
+  border: 1px solid #ddd;
+  padding: 10px 15px;
 }
 
 .sortEnable {
@@ -30,7 +39,9 @@
 }
 
 .table .body .bodyLine .bodyElement {
-
+  padding: 10px 15px;
+  text-align:left;
+  word-break: keep-all;
 }
 
 .odd {
@@ -38,4 +49,10 @@
 }
 .even {
   background-color:#ffffff;
+}
+
+.editor {
+  outline: 0;
+  border-style:none;
+  background-color: transparent;
 }

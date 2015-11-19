@@ -50,10 +50,12 @@ const SmartTable = React.createClass({
       this._myProps.bodyData = this._getBodyData(this._myProps.tableData)
     }
     return (
-        <table className='table'>
-          <TableHeader data={this._myProps.headerData} onClick={this._clickToSort} sortable={this.props.sortable} />
-          <TableBody data={this._myProps.bodyData} extendColumn={this.props.extendColumn} editable={this.props.editable} />
-        </table>
+        <div className='container'>
+          <table className='table'>
+            <TableHeader data={this._myProps.headerData} onClick={this._clickToSort} sortable={this.props.sortable} />
+            <TableBody data={this._myProps.bodyData} extendColumn={this.props.extendColumn} editable={this.props.editable} />
+          </table>
+        </div>
     )
   },
 

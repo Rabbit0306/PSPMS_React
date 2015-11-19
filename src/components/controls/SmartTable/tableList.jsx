@@ -45,13 +45,13 @@ const tableList = React.createClass({
         case 'string':
           const value = new Date(element)
           if (self.props.editable) {
-            if ( (/^[^\.\-\/:TZ]+$/).test(element) || value.toString() == 'Invalid Date' || !(/\d{1}\/\d{1}\/\d{1}/).test(element) ) {
-              row.push(<td className='table body bodyLine bodyElement' key={elementKey}><input value={element} onChange={self._inputOnChange} /></td>)
+            if ( (/^[^\.\-\/:TZ]+$/).test(element) || value.toString() === 'Invalid Date' && !(/\d{1}\/\d{1}\/\d{1}/).test(element) ) {
+              row.push(<td className='table body bodyLine bodyElement' key={elementKey}><input className='editor' value={element} onChange={self._inputOnChange} /></td>)
             } else {
-              row.push(<td className='table body bodyLine bodyElement' key={elementKey}><input value={value.toLocaleDateString()} onChange={self._inputOnChange} /></td>)
+              row.push(<td className='table body bodyLine bodyElement' key={elementKey}><input className='editor' value={value.toLocaleDateString()} onChange={self._inputOnChange} /></td>)
             }
           } else {
-            if ( (/^[^\.\-\/:TZ]+$/).test(element) || value.toString() == 'Invalid Date' || !(/\d{1}\/\d{1}\/\d{1}/).test(element) ) {
+            if ( (/^[^\.\-\/:TZ]+$/).test(element) || value.toString() === 'Invalid Date' && !(/\d{1}\/\d{1}\/\d{1}/).test(element) ) {
               row.push(<td className='table body bodyLine bodyElement' key={elementKey}>{element}</td>)
             } else {
               row.push(<td className='table body bodyLine bodyElement' key={elementKey}>{value.toLocaleDateString()}</td>)
@@ -61,7 +61,8 @@ const tableList = React.createClass({
         default:row.push(<td key={elementKey}>{element}</td>)
         }
       })
-      body.push(<tr key={lineKey} className={ 'table body bodyLine' + lineKey%2 === 0 ? ' even' : ' odd'}>{row}</tr>)
+      console.log();
+      body.push(<tr key={lineKey} className={ 'table body bodyLine' + (lineKey%2 === 0 ? ' odd' : ' even')}>{row}</tr>)
     })
     return body
   },

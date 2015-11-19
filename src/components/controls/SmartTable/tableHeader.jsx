@@ -15,7 +15,7 @@ const tableHeader = React.createClass({
   render () {
     return (
         <thead className='table head'>
-          <tr className={this.props.sortable ? 'table head headItem sortEnable' : 'table head headItem sortDisable'}>{this._modifyTableHeader()}</tr>
+          <tr className={this.props.sortable ? 'table head sortEnable' : 'table head sortDisable'}>{this._modifyTableHeader()}</tr>
         </thead>
     )
   },
@@ -23,7 +23,7 @@ const tableHeader = React.createClass({
   _modifyTableHeader () {
     const headers = [], self = this
     this.props.data.map(function (header, key) {
-      headers.push(<th key={key} onClick={self._clickHeader(self.props.onClick, key, self.props.data)}>{header['name']}</th>)
+      headers.push(<th className='headItem' key={key} onClick={self._clickHeader(self.props.onClick, key, self.props.data)}>{header['name']}</th>)
     })
     return headers
   },
